@@ -32,7 +32,18 @@ class ApiConsumer
         }
     }
     public function get_all_countries(){
-        return $this->api('all');
+        $results = $this->api('all');
+        $countries = [];
+        foreach($results as $result){
+            $countries[] = $result['name']['common'];
+        }
+        sort($countries);
+        return $countries;
+    }
+
+    public function get_country($country_name)
+    {
+        return $this->api("name/$country_name");
     }
 }
 ?>
